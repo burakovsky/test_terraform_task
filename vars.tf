@@ -22,9 +22,15 @@ variable "subnets" {
 
 ########## Security groups variables ##########
 
-variable "vpc_sg_name" {}
+variable "vpc_public_sg_name" {}
 
-variable "vpc_ingress_port_range" {
+variable "vpc_public_ingress_port_range" {
+  type = "list"
+}
+
+variable "vpc_private_sg_name" {}
+
+variable "vpc_private_ingress_port_range" {
   type = "list"
 }
 

@@ -24,17 +24,27 @@ module "key_pair" {
   public_key = "${var.public_key}"
 }
 
-# Create security group for vpc ec2 instances
-module "sg_ec2_vpc" {
+# Create security group for ec2 instances (public access)
+module "sg_public_ec2" {
   source              = "./modules/security_group"
   vpc_id              = "${module.network.vpc_id}"
   environment         = "${var.environment}"
-  sg_name             = "${var.vpc_sg_name}"
-  ingress_port_range  = "${var.vpc_ingress_port_range}"
+  sg_name             = "${var.vpc_public_sg_name}"
+  ingress_port_range  = "${var.vpc_public_ingress_port_range}"
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+}
+
+# Create security group for ec2 instances (private access)
+module "sg_private_ec2" {
+  source              = "./modules/security_group"
+  vpc_id              = "${module.network.vpc_id}"
+  environment         = "${var.environment}"
+  sg_name             = "${var.vpc_private_sg_name}"
+  ingress_port_range  = "${var.vpc_private_ingress_port_range}"
   ingress_cidr_blocks = "${list(var.vpc_cidr)}"
 }
 
-# Create security group for ELB
+# Create security group for ELB (public access)
 module "sg_elb" {
   source              = "./modules/security_group"
   vpc_id              = "${module.network.vpc_id}"

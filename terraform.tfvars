@@ -19,11 +19,14 @@ subnets = ["10.0.1.0/24", "10.0.2.0/24"]
 
     ########## Security groups variables ##########
 
-vpc_sg_name = "allow-ssh-http"
+vpc_public_sg_name = "allow-ssh"
 
-vpc_ingress_port_range = [22, 80]
+vpc_public_ingress_port_range = [22]
+
+vpc_private_sg_name = "allow-private-http"
+
+vpc_private_ingress_port_range = [80]
 
 elb_sg_name = "allow-http"
 
 elb_ingress_port_range = [80]
-
