@@ -79,3 +79,25 @@ variable "elb_health_check_interval" {
 variable "web_elb_health_check_target" {
   default = "HTTP:80/"
 }
+
+########## Auto Scaling variables ##########
+
+variable "asg_name" {}
+
+variable "associate_public_ip" {
+  default = "false"
+}
+
+variable "ami" {}
+
+variable "instance_type" {
+  default = "t2.micro"
+}
+
+variable "min_asg_size" {
+  default = 3
+}
+
+variable "max_asg_size" {
+  default = 3
+}

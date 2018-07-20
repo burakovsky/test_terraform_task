@@ -57,10 +57,10 @@ module "sg_elb" {
 #Create web ELB
 module "elb_web" {
   source                = "./modules/elb"
-  elb_name              = "${var.elb_name}"
+  name                  = "${var.elb_name}"
   environment           = "${var.environment}"
-  security_group_ids    = "${list(module.sg_elb.security_group_id)}"
-  subnet_id             = "${module.network.public_subnets}"
+  security_group_ids    = ["${list(module.sg_elb.security_group_id)}"]
+  subnet_id             = ["${module.network.public_subnets}"]
   instance_port         = "${var.instance_balancing_port}"
   instance_protocol     = "${var.instance_balancing_protocol}"
   lb_port               = "${var.elb_listen_port}"
@@ -70,4 +70,20 @@ module "elb_web" {
   health_check_timeout  = "${var.elb_health_check_timeout}"
   health_check_target   = "${var.web_elb_health_check_target}"
   health_check_interval = "${var.elb_health_check_interval}"
+}
+
+#Create web autoscaling group
+module "asg_web" {
+  source              = "./modules/asg"
+  asg_name            = "${var.asg_name}"
+  environment         = "${var.environment}"
+  image_id            = "${var.ami}"
+  instance_type       = "${var.instance_type}"
+  key_name            = "${module.key_pair.ec2_key_pair}"
+  security_group_ids  = ["${module.sg_public_ec2.security_group_id}", "${module.sg_private_ec2.security_group_id}"]
+  subnet_ids          = "${module.network.public_subnets}"
+  associate_public_ip = "${var.associate_public_ip}"
+  min_asg_size        = "${var.min_asg_size}"
+  max_asg_size        = "${var.max_asg_size}"
+  load_balancers_name = ["${module.elb_web.elb_name}"]
 }
