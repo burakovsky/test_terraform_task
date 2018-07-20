@@ -30,3 +30,9 @@ vpc_private_ingress_port_range = [80]
 elb_sg_name = "allow-http"
 
 elb_ingress_port_range = [80]
+
+
+    ########## Load balancer variables ##########
+
+elb_name = "nginx-elb"
+

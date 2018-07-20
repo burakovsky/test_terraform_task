@@ -53,3 +53,21 @@ module "sg_elb" {
   ingress_port_range  = "${var.elb_ingress_port_range}"
   ingress_cidr_blocks = ["0.0.0.0/0"]
 }
+
+#Create web ELB
+module "elb_web" {
+  source                = "./modules/elb"
+  elb_name              = "${var.elb_name}"
+  environment           = "${var.environment}"
+  security_group_ids    = "${list(module.sg_elb.security_group_id)}"
+  subnet_id             = "${module.network.public_subnets}"
+  instance_port         = "${var.instance_balancing_port}"
+  instance_protocol     = "${var.instance_balancing_protocol}"
+  lb_port               = "${var.elb_listen_port}"
+  lb_protocol           = "${var.elb_listen_protocol}"
+  healthy_threshold     = "${var.elb_healthy_threshold}"
+  unhealthy_threshold   = "${var.elb_unhealthy_threshold}"
+  health_check_timeout  = "${var.elb_health_check_timeout}"
+  health_check_target   = "${var.web_elb_health_check_target}"
+  health_check_interval = "${var.elb_health_check_interval}"
+}
