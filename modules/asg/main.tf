@@ -1,5 +1,5 @@
 resource "aws_iam_role" "s3_access" {
-  name = "s3_access"
+  name = "access_to_s3"
 
   assume_role_policy = <<EOF
 {
@@ -18,7 +18,7 @@ resource "aws_iam_role" "s3_access" {
 EOF
 }
 
-resource "template_file" "policy_text" {
+data "template_file" "policy_text" {
   vars = {
     bucket_name = "${var.bucket_name}"
   }
@@ -46,10 +46,10 @@ EOF
 }
 
 resource "aws_iam_role_policy" "s3_access" {
-  name = "s3_access"
+  name = "access_to_s3"
   role = "${aws_iam_role.s3_access.id}"
 
-  policy = "${template_file.policy_text.rendered}"
+  policy = "${data.template_file.policy_text.rendered}"
 }
 
 resource "aws_iam_instance_profile" "s3_access" {

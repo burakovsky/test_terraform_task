@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
-resource "template_file" "s3_policy" {
+data "template_file" "s3_policy" {
   vars = {
     bucket_name = "${var.bucket}"
     arn         = "${var.nginx_policy_arn}"
@@ -34,5 +34,5 @@ POLICY
 resource "aws_s3_bucket_policy" "nginx_policy" {
   bucket = "${aws_s3_bucket.b.id}"
 
-  policy = "${template_file.s3_policy.rendered}"
+  policy = "${data.template_file.s3_policy.rendered}"
 }

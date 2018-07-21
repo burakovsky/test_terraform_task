@@ -42,9 +42,9 @@ asg_name = "nginx-asg"
 
 associate_public_ip = "true"
 
-ami = "ami-ba602bc2"
+ami = "ami-ba602bc2" # Ubuntu-16.04 Update user data script for auto scaling group in case of changing image.
 
     ########## S3 bucket variables ##########
 
-bucket_name = "oxagile-maksim-bucket"
+bucket_name = "oxagile-maksim-test-bucket"
 
