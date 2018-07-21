@@ -1,3 +1,0 @@
-bucket = "oxagile-maksim-test-bucket"
-key    = "terraform.tfstate"
-region = "us-west-2"

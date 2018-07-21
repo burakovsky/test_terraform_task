@@ -14,6 +14,8 @@ variable "min_asg_size" {}
 
 variable "max_asg_size" {}
 
+variable "bucket_name" {}
+
 variable "security_group_ids" {
   type = "list"
 }

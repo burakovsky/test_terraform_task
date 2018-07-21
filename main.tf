@@ -1,8 +1,3 @@
-# # Configure s3 bucket as backend for terraform
-# terraform {
-#   backend "s3" {}
-# }
-
 # Specify the provider and access details
 provider "aws" {
   region = "${var.aws_region}"
@@ -55,7 +50,7 @@ module "sg_elb" {
 }
 
 #Create web ELB
-module "elb_web" {
+module "elb" {
   source                = "./modules/elb"
   name                  = "${var.elb_name}"
   environment           = "${var.environment}"
@@ -73,7 +68,7 @@ module "elb_web" {
 }
 
 #Create web autoscaling group
-module "asg_web" {
+module "asg" {
   source              = "./modules/asg"
   asg_name            = "${var.asg_name}"
   environment         = "${var.environment}"
@@ -85,5 +80,14 @@ module "asg_web" {
   associate_public_ip = "${var.associate_public_ip}"
   min_asg_size        = "${var.min_asg_size}"
   max_asg_size        = "${var.max_asg_size}"
-  load_balancers_name = ["${module.elb_web.elb_name}"]
+  load_balancers_name = ["${module.elb.elb_name}"]
+  bucket_name         = "${var.bucket_name}"
+}
+
+# Create s3 bucket with access policy
+module "s3_bucket" {
+  source           = "./modules/s3_bucket"
+  environment      = "${var.environment}"
+  bucket           = "${var.bucket_name}"
+  nginx_policy_arn = "${module.asg.s3_access_role_arn}"
 }

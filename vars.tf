@@ -101,3 +101,7 @@ variable "min_asg_size" {
 variable "max_asg_size" {
   default = 3
 }
+
+########## S3 bucket variables ##########
+
+variable "bucket_name" {}

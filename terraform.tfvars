@@ -6,10 +6,8 @@ environment = "stage"
 
 key_name = "test_key"
 
-#public_key = "${file("/home/burakouski/.ssh/id_rsa.pub")}"
-
-public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9zz4MjMWfgEorJRzd/RbuD0s/1IXceRysYYyU7DnYXJ7H+QW6J1l40sQhDYrrDosiPk6mSq78oKkIk1zAoxEk6LD9nEyke/wU/hsPpmp8wwJ3MG7cdA7JexA/BAWaAv9BRbCfZ9wFGxHYkKD2HUUiHUK86vBiXLBT8IJoQj5ppbzY6chFtkbh78XN3ARkYJK/gCXgxfmihDdwXOISvI7XKptiqo86QQdr5jn3cyjtGkxH6njENvjKw78JF6O9QupZLgf8CWHSYG7ve5tkfbvtUtZU1h3vmvE9y3xA1W3pSpotDHsx9TheZQuEXHhDzbOHjr9k1I2FetRvBf/J/ZNN burakouski@burakouski"
-
+public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC01GHV0KTKo5/Mf4La+doqXaMpiG7XWpldln0siVTV/yODXMl/V9P2ZlqtdXQMGamsu65uJDBw8rm4phqjmucUHReWgPW0i/MCVhljGSiGGZBIskbPkiCO+tdTmCmKS0xSyNm34FsPuhhqtbyZ1cLF8kDBrb/ibhCnyRY6/wQ738D33pYmtuNHIFYS9Je4tScCvFlksHoMFW/+zNHstZNA3hxh4VwY7VrdFndO+e8y3/eka97DevO2c8TZ76dz9BLb75ZzXMtsKZLAystcMm4DbxHfK4YOn6qLLNEFxTvLGln0Y9uosXBgja1x2FV988Q6eMgf2ZVtIMHKHs1s07P"
+    
     ########## Network variables ##########
 
 vpc_cidr = "10.0.0.0/16"
@@ -44,5 +42,9 @@ asg_name = "nginx-asg"
 
 associate_public_ip = "true"
 
-ami = "ami-28e07e50"
+ami = "ami-ba602bc2"
+
+    ########## S3 bucket variables ##########
+
+bucket_name = "oxagile-maksim-bucket"
 
