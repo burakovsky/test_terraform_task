@@ -17,6 +17,6 @@
 ***
 
 ### Links for checking results:
-[Load Balancer](nginx-elb-1863557859.us-west-2.elb.amazonaws.com)
+[Load Balancer](http://nginx-elb-1863557859.us-west-2.elb.amazonaws.com)
 ***
 Use `terraform.tfvars` file for changing resource parameters.
